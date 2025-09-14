@@ -25,8 +25,10 @@ class AuthController extends Controller
             'gender' => 'required|string',
             'accid' => 'required|string|unique:accs,accid',
             'username' => 'required|string|max:255|unique:accs,username',
-            'password' => 'required|string',
+            'password' => 'required|string|min:6',
             'role' => 'required|string',
+        ], [
+            'password.min' => 'Password must be at least 6 characters'
         ]);
 
         $role = $request->role ?? 'user';

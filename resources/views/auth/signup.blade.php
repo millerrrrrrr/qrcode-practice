@@ -10,15 +10,7 @@
 </head>
 
 <body class="min-h-screen flex items-center justify-center">
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+  
 
 
     <form action=" {{ route('signupPost') }} " method="POST">
@@ -37,22 +29,26 @@
                     <div>
                         <label for="name" class="font-semibold">Name</label>
                         <input type="text" id="name" name="name"
-                            class="input outline-none focus:outline-none w-full">
+                            class="input outline-none focus:outline-none w-full" 
+                            value="{{ old('name') }}">
                     </div>
 
                     <!-- Birth Date -->
                     <div>
                         <label for="birthdate" class="font-semibold">Birth Date</label>
                         <input type="date" id="birthdate" name="birthdate"
-                            class="input outline-none focus:outline-none w-full">
+                            class="input outline-none focus:outline-none w-full"
+                            value="{{ old('birthdate', '') }}">
                     </div>
 
                     <!-- Age -->
                     <div>
                         <label for="age" class="font-semibold">Age</label>
                         <input type="text" id="age" name="age" readonly disabled
-                            class="input outline-none focus:outline-none w-full">
-                            <input type="hidden" id="hidden-age" name="age">
+                            class="input outline-none focus:outline-none w-full"
+                            value=" {{ old('age') }} ">
+                        <input type="hidden" id="hidden-age" name="age"
+                             value=" {{ old('hidden-age') }} ">
 
                     </div>
 
@@ -61,8 +57,8 @@
                         <label for="gender" class="font-semibold">Gender</label>
                         <select id="gender" name="gender" class="select w-full">
                             <option value="" disabled selected>Select gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
+                            <option value="male" {{ old('gender') == 'male' ? 'selected' : ''}}>Male</option>
+                            <option value="female" {{ old('gender') == 'female' ? 'selected' : ''}}>Female</option>
                         </select>
                     </div>
                 </div>
@@ -73,8 +69,10 @@
                     <div>
                         <label for="accid" class="font-semibold">Acc Id</label>
                         <input type="text" id="accid" name="accid" readonly disabled
-                            class="input outline-none focus:outline-none w-full">
-                            <input type="hidden" id="hidden-accid" name="accid">
+                            class="input outline-none focus:outline-none w-full"
+                            value=" {{ old('accid') }} ">
+                        <input type="hidden" id="hidden-accid" name="accid"
+                         value=" {{ old('hidden-accid') }} ">
 
                     </div>
 
@@ -82,14 +80,16 @@
                     <div>
                         <label for="username" class="font-semibold">Username</label>
                         <input type="text" id="username" name="username"
-                            class="input outline-none focus:outline-none w-full">
+                            class="input outline-none focus:outline-none w-full"
+                            value=" {{ old('username') }} ">
                     </div>
 
                     <!-- Password -->
                     <div>
                         <label for="password" class="font-semibold">Password</label>
                         <input type="password" id="password" name="password"
-                            class="input outline-none focus:outline-none w-full">
+                            class="input outline-none focus:outline-none w-full" 
+                            >
                     </div>
 
                     <!-- Role -->
@@ -102,7 +102,8 @@
                         </select>
                     </div> --}}
                     <div>
-                        <input type="text" class="input" name="role" value="user" hidden>
+                        <input type="text" class="input" name="role" value="user" hidden
+                        value=" {{ old('role') }} ">
                     </div>
                 </div>
             </div>
@@ -171,6 +172,14 @@
                     title: @json(session('question'))
                 })
             @endif
+
+            @foreach ($errors->all() as $error)
+                Toast.fire({
+                    icon: 'warning',
+                    title: @json($error)
+                });
+            @endforeach
+
         });
     </script>
 

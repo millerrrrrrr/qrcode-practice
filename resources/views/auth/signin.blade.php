@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=
     , initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Sign In</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
