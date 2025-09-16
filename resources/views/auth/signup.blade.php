@@ -12,6 +12,7 @@
 <body class="min-h-screen flex items-center justify-center">
   
 {{-- something --}}
+{{-- for green --}}
 
     <form action=" {{ route('signupPost') }} " method="POST">
 
